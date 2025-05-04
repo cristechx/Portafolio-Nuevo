@@ -1,0 +1,331 @@
+/* Mobile-First Approach */
+/* Base styles are for mobile, then we add desktop enhancements */
+
+/* Mobile App-like Styles */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+    
+    /* iOS-like status bar */
+    .status-bar {
+        height: 44px;
+        background: #000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        font-size: 14px;
+        color: #fff;
+    }
+    
+    .status-bar::before {
+        content: attr(data-time);
+    }
+    
+    .status-bar::after {
+        content: '100%'; /* Battery indicator */
+    }
+    
+    /* Mobile Header */
+    .header {
+        padding: 10px 20px;
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+    
+    .header.scrolled {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Hero Section - Mobile */
+    .hero-section {
+        padding: 0 20px;
+        min-height: calc(100vh - 44px);
+    }
+    
+    .profile-image-wrapper {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 30px;
+    }
+    
+    .hero-title {
+        font-size: clamp(2rem, 8vw, 4rem);
+        margin-bottom: 15px;
+    }
+    
+    .hero-subtitle {
+        font-size: 14px;
+        letter-spacing: 4px;
+        margin-bottom: 30px;
+    }
+    
+    .social-links {
+        gap: 20px;
+    }
+    
+    .social-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    /* Mobile Navigation */
+    .mobile-menu {
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+    
+    .mobile-menu ul {
+        padding: 40px 0;
+    }
+    
+    .mobile-menu li {
+        margin: 25px 0;
+    }
+    
+    .mobile-menu .nav-link {
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -1px;
+    }
+    
+    /* Sections - Mobile */
+    section {
+        padding: 60px 0;
+    }
+    
+    .container {
+        padding: 0 20px;
+    }
+    
+    .section-title {
+        font-size: clamp(1.8rem, 6vw, 3rem);
+        margin-bottom: 30px;
+    }
+    
+    /* About Section - Mobile */
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .about-text {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+    
+    .personal-info {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .cv-button {
+        width: 100%;
+        justify-content: center;
+        padding: 18px 30px;
+    }
+    
+    .interests-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .interest-item {
+        padding: 15px;
+        font-size: 14px;
+    }
+    
+    /* Skills Section - Mobile */
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .skill-item {
+        margin-bottom: 25px;
+    }
+    
+    .skill-name,
+    .skill-percent {
+        font-size: 14px;
+    }
+    
+    /* Experience Section - Mobile */
+    .experience-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .timeline {
+        padding-left: 20px;
+    }
+    
+    .timeline-content h4 {
+        font-size: 16px;
+    }
+    
+    .timeline-org {
+        font-size: 14px;
+    }
+    
+    .timeline-content p {
+        font-size: 13px;
+    }
+    
+    /* Portfolio Section - Mobile */
+    .portfolio-filters {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .portfolio-filter {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+    
+    .portfolio-grid {
+        padding: 0 20px;
+        flex-wrap: nowrap;
+        display: inline-flex;
+    }
+    
+    .portfolio-item {
+        width: 280px;
+        height: 380px;
+    }
+    
+    .portfolio-info h3 {
+        font-size: 20px;
+    }
+    
+    .portfolio-info p {
+        font-size: 13px;
+    }
+    
+    /* Footer - Mobile */
+    .footer {
+        padding: 40px 0;
+    }
+    
+    .footer-social {
+        gap: 20px;
+    }
+    
+    .footer-copyright {
+        font-size: 13px;
+        text-align: center;
+    }
+    
+    /* Contact Form - Mobile */
+    .contact-form-wrapper {
+        margin-top: 30px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-control {
+        padding: 15px;
+        font-size: 16px;
+    }
+    
+    .submit-button {
+        width: 100%;
+        padding: 18px;
+    }
+    
+    /* Hide custom cursor on mobile */
+    .cursor,
+    .cursor-follower {
+        display: none !important;
+    }
+    
+    /* Disable magnetic effect on mobile */
+    .magnetic {
+        transform: none !important;
+    }
+    
+    /* Optimize touch targets */
+    button,
+    .btn,
+    .portfolio-item,
+    .social-icon,
+    .nav-link {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Prevent zoom on input focus */
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        font-size: 16px;
+    }
+    
+    /* Smooth scrolling for mobile */
+    html {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Tablet Portrait */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 0 40px;
+    }
+    
+    .skills-grid,
+    .experience-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    
+    .portfolio-item {
+        width: 350px;
+        height: 450px;
+    }
+}
+
+/* Desktop Enhancements */
+@media (min-width: 1025px) {
+    /* Enhance animations for better hardware */
+    .parallax {
+        transform: translateY(0);
+        transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    /* Add desktop-only features */
+    .desktop-only {
+        display: block;
+    }
+    
+    /* Optimize portfolio for horizontal scroll */
+    .portfolio-scroll-wrapper {
+        cursor: grab;
+    }
+    
+    .portfolio-scroll-wrapper:active {
+        cursor: grabbing;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi) {
+    /* Optimize for retina displays */
+    .profile-image,
+    .portfolio-image-wrapper img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }

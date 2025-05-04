@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristian Garcia - Desarrollador Web</title>
+    <link rel="icon" href="img/icon.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    
+    <!-- Scripts -->
+    <script defer src="js/app.js"></script>
+    <script defer src="js/cursor.js"></script>
+    <script defer src="js/scroll.js"></script>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Cargando...</div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-text">CRISTIAN GARCIA</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="nav-link">Inicio</a></li>
+                <li><a href="#about" class="nav-link">Sobre Mí</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experiencia</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Menu">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </button>
+    </header>
+
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu">
+        <ul>
+            <li><a href="#home" class="nav-link">Inicio</a></li>
+            <li><a href="#about" class="nav-link">Sobre Mí</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#experience" class="nav-link">Experiencia</a></li>
+            <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-background">
+                <div class="hero-shapes"></div>
+            </div>
+            <div class="hero-content">
+                <div class="profile-image-wrapper">
+                    <img src="img/Foto-Perfil.jpg" alt="Cristian Garcia" class="profile-image">
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-text">Cristian Garcia</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Desarrollador Web & UI/UX Designer
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/CristianGarci42022/CristianGarci42022/" target="_blank" class="social-icon">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/cristian-garc%C3%ADa-848ba616b" target="_blank" class="social-icon">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://wa.me/+573134723829" target="_blank" class="social-icon">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:Cristianpulido672@gmail.com" class="social-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label">01 —</span>
+                    <h2 class="section-title">Sobre Mí</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>¡Hola! Soy <strong>Cristian Garcia</strong>, desarrollador web especializado en WordPress y desarrollo de plugins a medida. Mi experiencia incluye herramientas avanzadas como <strong>JetEngine</strong> y <strong>Crocoblock</strong>, así como múltiples lenguajes de programación.</p>
+                        <p>Certificado en <strong>ISO 27001</strong>, me enfoco en crear soluciones innovadoras, seguras y altamente funcionales.</p>
+                        <div class="personal-info">
+                            <div class="info-item">
+                                <span class="info-label">Teléfono</span>
+                                <span class="info-value">+57 3134723829</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email</span>
+                                <span class="info-value">Cristianpulido672@gmail.com</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Ubicación</span>
+                                <span class="info-value">Bogotá, Colombia</span>
+                            </div>
+                        </div>
+                        <a href="CV/CV-Cristian Garcia .pdf" download class="cv-button">
+                            Descargar CV
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                    </div>
+                    <div class="about-image">
+                        <div class="decorative-shape"></div>
+                        <!-- Agregamos un grid de intereses -->
+                        <div class="interests-grid">
+                            <div class="interest-item"><i class="fa-solid fa-gamepad"></i> Juegos</div>
+                            <div class="interest-item"><i class="fa-solid fa-headphones"></i> Música</div>
+                            <div class="interest-item"><i class="fa-solid fa-plane"></i> Viajar</div>
+                            <div class="interest-item"><i class="fa-solid fa-microchip"></i> Tecnología</div>
+                            <div class="interest-item"><i class="fa-solid fa-camera"></i> Fotografía</div>
+                            <div class="interest-item"><i class="fa-solid fa-book"></i> Libros</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label">02 —</span>
+                    <h2 class="section-title">Skills</h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skills-column">
+                        <h3>Habilidades Técnicas</h3>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">HTML & CSS</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">React, Angular</span>
+                                <span class="skill-percent">60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="60%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">WordPress</span>
+                                <span class="skill-percent">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Bases de Datos</span>
+                                <span class="skill-percent">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skills-column">
+                        <h3>Habilidades Profesionales</h3>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Comunicación</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Trabajo en Equipo</span>
+                                <span class="skill-percent">100%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="100%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Creatividad</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Autodidacta</span>
+                                <span class="skill-percent">100%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="100%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Curiosidad</span>
+                                <span class="skill-percent">100%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label">03 —</span>
+                    <h2 class="section-title">Experiencia</h2>
+                </div>
+                <div class="experience-grid">
+                    <div class="experience-column">
+                        <h3>Educación y Certificaciones</h3>
+                        <div class="timeline">
+                            <div class="timeline-item" data-aos="fade-up">
+                                <div class="timeline-date">2024</div>
+                                <div class="timeline-content">
+                                    <h4>Certificación ISO 27001</h4>
+                                    <p class="timeline-org">Hacker Mentor</p>
+                                    <p>Desarrollé habilidades en ciberseguridad y principios fundamentales de la norma ISO 27001.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                                <div class="timeline-date">2022</div>
+                                <div class="timeline-content">
+                                    <h4>Diplomado en Desarrollo de Software</h4>
+                                    <p class="timeline-org">Universidad de Antioquia</p>
+                                    <p>Obtención de conocimientos especializados en el ciclo de vida del desarrollo de software.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                                <div class="timeline-date">2019</div>
+                                <div class="timeline-content">
+                                    <h4>Tecnólogo en Desarrollo de Sistemas</h4>
+                                    <p class="timeline-org">SENA</p>
+                                    <p>Especializado en desarrollo e implementación de soluciones tecnológicas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="experience-column">
+                        <h3>Experiencia Laboral</h3>
+                        <div class="timeline">
+                            <div class="timeline-item" data-aos="fade-up">
+                                <div class="timeline-date">2024 - Actual</div>
+                                <div class="timeline-content">
+                                    <h4>Desarrollador WordPress</h4>
+                                    <p class="timeline-org">Colectivo Web</p>
+                                    <p>Especializado en sitios web responsivos, SEO, Elementor Pro, JetEngine y desarrollo de plugins personalizados. Gestión avanzada de cPanel y migraciones.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                                <div class="timeline-date">2021 - 2024</div>
+                                <div class="timeline-content">
+                                    <h4>Desarrollador Front-End</h4>
+                                    <p class="timeline-org">Freelance</p>
+                                    <p>Enfoque en desarrollo web full-stack, optimización SEO y certificación ISO 27001.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                                <div class="timeline-date">2021</div>
+                                <div class="timeline-content">
+                                    <h4>Desarrollador Web</h4>
+                                    <p class="timeline-org">ManpowerGroup</p>
+                                    <p>Capacitación en Angular, Java, React y metodologías ágiles.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio-section">
+            <div class="container-fluid">
+                <div class="section-header">
+                    <span class="section-label">04 —</span>
+                    <h2 class="section-title">Portfolio</h2>
+                </div>
+                <div class="portfolio-filters">
+                    <button class="portfolio-filter active" data-filter="all">Todo</button>
+                    <button class="portfolio-filter" data-filter="Agencias">Agencias</button>
+                    <button class="portfolio-filter" data-filter="proyectos-personales">Personales</button>
+                    <button class="portfolio-filter" data-filter="proyectos-moviles">Móviles</button>
+                </div>
+                <div class="portfolio-scroll-wrapper">
+                    <div class="portfolio-grid">
+                        <!-- Agencias -->
+                        <div class="portfolio-item" data-category="Agencias">
+                            <div class="portfolio-image-wrapper">
+                                <img src="img/cosostenible.png" alt="Cosostenible">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info">
+                                        <h3>Cosostenible</h3>
+                                        <p>Colectivo Web</p>
+                                        <a href="https://cosostenible.com/" target="_blank" class="portfolio-link">
+                                            Ver Proyecto <i class="fa-solid fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Add more portfolio items here -->
+                        <div class="portfolio-item" data-category="Agencias">
+                            <div class="portfolio-image-wrapper">
+                                <img src="img/baqueroleyva.png" alt="Baquero Leyva">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info">
+                                        <h3>Baquero Leyva</h3>
+                                        <p>Colectivo Web</p>
+                                        <a href="https://baqueroleyvaarrendamientos.com/" target="_blank" class="portfolio-link">
+                                            Ver Proyecto <i class="fa-solid fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Personales -->
+                        <div class="portfolio-item" data-category="proyectos-personales">
+                            <div class="portfolio-image-wrapper">
+                                <img src="img/web-Fotografia.png" alt="Fotografía">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info">
+                                        <h3>Web Fotografía</h3>
+                                        <p>Proyecto Personal</p>
+                                        <a href="https://daniel-phog.netlify.app/" target="_blank" class="portfolio-link">
+                                            Ver Proyecto <i class="fa-solid fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Continue adding portfolio items -->
+                        <!-- Ensure to include all your current projects -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h2>¿Tienes un proyecto en mente?</h2>
+                        <p>Estoy disponible para nuevos proyectos. ¡Hablemos!</p>
+                        <div class="contact-details">
+                            <a href="mailto:Cristianpulido672@gmail.com" class="contact-email">
+                                Cristianpulido672@gmail.com
+                            </a>
+                            <a href="tel:+573134723829" class="contact-phone">
+                                +57 313 472 3829
+                            </a>
+                        </div>
+                    </div>
+                    <div class="contact-form-wrapper">
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" placeholder="Mensaje" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-button">
+                                Enviar Mensaje
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-social">
+                    <a href="https://github.com/CristianGarci42022" class="social-icon">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/cristian-garc%C3%ADa-848ba616b" class="social-icon">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://wa.me/+573134723829" class="social-icon">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+                <p class="footer-copyright">
+                    © 2024 Cristian Garcia. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#home" class="back-to-top" aria-label="Volver arriba">
+        <i class="fa-solid fa-chevron-up"></i>
+    </a>
+</body>
+</html>
