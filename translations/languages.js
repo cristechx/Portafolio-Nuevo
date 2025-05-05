@@ -57,12 +57,24 @@ const translations = {
         "portfolio.personalProject": "Proyecto Personal",
         "contact.title": "¿Tienes un proyecto en mente?",
         "contact.subtitle": "Estoy disponible para nuevos proyectos. ¡Hablemos!",
+        "contact.name": "Nombre",
+        "contact.email": "Email",
+        "contact.subject": "Asunto",
+        "contact.message": "Mensaje",
+        "contact.send": "Enviar Mensaje",
         "contact.sendEmail": "Enviar Email",
         "contact.callNow": "Llamar Ahora",
         "footer.copyright": "© 2024 Cristian Garcia. Todos los derechos reservados.",
         "theme.themes": "Temas",
         "theme.green": "Verde",
         "theme.white": "Blanco",
+        "portfolio.prev": "Anterior",
+        "portfolio.next": "Siguiente",
+        "contact.success": "¡Mensaje enviado! Gracias por contactarme.",
+        "contact.error": "Error al enviar el mensaje. Inténtalo de nuevo.",
+        "error.required": "Este campo es obligatorio",
+        "error.email": "Por favor, introduce un email válido",
+        "popup.close": "Cerrar"
     },
     en: {
         "loading": "Loading...",
@@ -121,12 +133,24 @@ const translations = {
         "portfolio.personalProject": "Personal Project",
         "contact.title": "Have a project in mind?",
         "contact.subtitle": "I'm available for new projects. Let's talk!",
+        "contact.name": "Name",
+        "contact.email": "Email",
+        "contact.subject": "Subject",
+        "contact.message": "Message",
+        "contact.send": "Send Message",
         "contact.sendEmail": "Send Email",
         "contact.callNow": "Call Now",
         "footer.copyright": "© 2024 Cristian Garcia. All rights reserved.",
         "theme.themes": "Themes",
         "theme.green": "Green",
         "theme.white": "White",
+        "portfolio.prev": "Previous",
+        "portfolio.next": "Next",
+        "contact.success": "Message sent! Thank you for contacting me.",
+        "contact.error": "Error sending message. Please try again.",
+        "error.required": "This field is required",
+        "error.email": "Please enter a valid email",
+        "popup.close": "Close"
     }
 };
 
@@ -188,7 +212,7 @@ class LanguageManager {
     }
 }
 
-// Initialize language manager
+// Inicializar language manager
 document.addEventListener('DOMContentLoaded', () => {
     new LanguageManager();
 });

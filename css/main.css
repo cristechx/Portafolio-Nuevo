@@ -8,6 +8,7 @@
     --text-color: #ffffff;
     --text-muted: #a0a0a0;
     --card-bg: #1a1a1a;
+    --transition: all 0.3s ease; /* Esta es la variable que falta */
 }
 
 /* Resto de tu CSS actual... */
@@ -354,38 +355,7 @@ nav ul {
     transition: var(--transition);
 }
 
-/* Mobile Menu */
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100vh;
-    background: var(--background-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-    transition: right 0.4s ease;
-}
 
-.mobile-menu.active {
-    right: 0;
-}
-
-.mobile-menu ul {
-    list-style: none;
-    text-align: center;
-}
-
-.mobile-menu li {
-    margin: 30px 0;
-}
-
-.mobile-menu .nav-link {
-    font-size: 36px;
-    font-weight: 700;
-}
 
 /* Hero Section */
 .hero-section {
@@ -1004,5 +974,589 @@ section {
     .social-icon {
         width: 40px;
         height: 40px;
+    }
+
+}
+
+/* Formulario de contacto */
+.contact-section {
+    padding: 120px 0;
+    background: linear-gradient(to right, var(--background-color), var(--primary-color));
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
+}
+
+.contact-subtitle {
+    font-size: 20px;
+    margin-bottom: 40px;
+    color: var(--text-color);
+}
+
+.contact-details {
+    margin-bottom: 40px;
+}
+
+.contact-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: var(--text-muted);
+}
+
+.contact-detail i {
+    margin-right: 15px;
+    font-size: 20px;
+    color: var(--accent-color);
+    width: 24px;
+    text-align: center;
+}
+
+.contact-email, .contact-phone {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-email:hover, .contact-phone:hover {
+    color: var(--accent-color);
+}
+
+.contact-social {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.contact-form-container {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.form-group input, .form-group textarea {
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    resize: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-group input::placeholder, .form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.submit-btn {
+    padding: 15px 30px;
+    border-radius: 8px;
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(28, 182, 152, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Personalización tema blanco */
+body[data-theme="white"] .contact-form-container {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="white"] .form-group input, 
+body[data-theme="white"] .form-group textarea {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="white"] .form-group input::placeholder, 
+body[data-theme="white"] .form-group textarea::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="white"] .form-group input:focus, 
+body[data-theme="white"] .form-group textarea:focus {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Animaciones del formulario */
+.contact-form .form-group {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: formItemsAppear 0.5s forwards;
+}
+
+.contact-form .form-group:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.contact-form .form-group:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.contact-form .form-group:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.contact-form .form-group:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.contact-form .submit-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: formItemsAppear 0.5s forwards 0.5s;
+}
+
+@keyframes formItemsAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsivo para contacto */
+@media screen and (max-width: 1024px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .contact-details {
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .contact-form-container {
+        padding: 25px;
+    }
+    
+    .contact-subtitle {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+    
+    .contact-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 30px;
+    }
+    
+    .contact-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 16px 24px;
+        background: var(--accent-color);
+        color: #000;
+        text-decoration: none;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .contact-button:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Estilos para validación y mensajes del formulario */
+.form-group input.is-invalid, 
+.form-group textarea.is-invalid {
+    border-color: #ff4d4d;
+}
+
+.form-group input.is-valid, 
+.form-group textarea.is-valid {
+    border-color: #32CD32;
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Overlay y mensajes de éxito/error */
+.form-message-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.form-message-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.form-success-message,
+.form-error-message {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.form-message-overlay.active .form-success-message,
+.form-message-overlay.active .form-error-message {
+    transform: translateY(0);
+}
+
+.success-icon,
+.error-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 30px;
+}
+
+.success-icon {
+    background: rgba(50, 205, 50, 0.2);
+    color: #32CD32;
+}
+
+.error-icon {
+    background: rgba(255, 77, 77, 0.2);
+    color: #ff4d4d;
+}
+
+.form-success-message h3,
+.form-error-message h3 {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.form-success-message p,
+.form-error-message p {
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.close-message-btn {
+    padding: 12px 25px;
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.close-message-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(28, 182, 152, 0.4);
+}
+
+/* Ajustes para tema blanco */
+body[data-theme="white"] .form-success-message,
+body[data-theme="white"] .form-error-message {
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Efectos de toque para móvil */
+.touch-active {
+    transform: scale(0.96);
+    opacity: 0.8;
+}
+
+.touch-feedback {
+    position: relative;
+    overflow: hidden;
+}
+
+.touch-feedback::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    animation: touch-ripple 0.5s ease-out;
+}
+
+@keyframes touch-ripple {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+    }
+}
+
+/* Modo PWA y adaptaciones para pantalla completa */
+.is-pwa header {
+    padding-top: env(safe-area-inset-top);
+}
+
+.is-pwa .bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.is-pwa .mobile-theme-toggle {
+    bottom: calc(80px + env(safe-area-inset-bottom));
+}
+
+/* Clases para dispositivos táctiles */
+.is-touch-device .cursor,
+.is-touch-device .cursor-follower {
+    display: none !important;
+}
+
+/* Mejor táctil para móvil */
+.is-touch-device button,
+.is-touch-device .nav-link,
+.is-touch-device .portfolio-filter,
+.is-touch-device .social-icon,
+.is-touch-device .theme-btn,
+.is-touch-device .lang-btn {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Animaciones reducidas para preferencia del usuario */
+.reduced-motion * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+}
+
+/* Añadir estos estilos a main.css para corregir problemas de visualización */
+/* Estilos para la navegación móvil */
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+    
+    .nav {
+        display: none;
+    }
+    
+    .desktop-nav {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .hamburger span {
+        display: block;
+        width: 25px;
+        height: 2px;
+        background-color: var(--text-color);
+        margin: 6px 0;
+        transition: all 0.3s ease;
+    }
+    
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+    
+    .mobile-overlay-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--background-color);
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-overlay-menu.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .mobile-menu-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+    
+    .mobile-menu-item {
+        margin: 20px 0;
+    }
+    
+    .mobile-menu-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 18px;
+        transition: color 0.3s ease;
+    }
+    
+    .mobile-menu-icon {
+        margin-right: 10px;
+    }
+    
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 998;
+        display: flex;
+        justify-content: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .bottom-nav-content {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        max-width: 500px;
+    }
+    
+    .nav-tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 12px;
+        transition: color 0.3s ease;
+    }
+    
+    .nav-tab.active {
+        color: var(--accent-color);
+    }
+    
+    .nav-tab .icon {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+}
+
+/* Ajustes adicionales para arreglar problemas de visualización */
+@media screen and (max-width: 768px) {
+    /* Forzar visibilidad de secciones en móvil */
+    section {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        transition: none !important;
+        visibility: visible !important;
+    }
+    
+    /* Corregir visibilidad en hero section */
+    .hero-content * {
+        opacity: 1 !important;
+    }
+    
+    /* Mejorar visualización en dispositivos táctiles */
+    .is-touch-device {
+        cursor: auto !important;
+    }
+    
+    .is-touch-device * {
+        cursor: auto !important;
+    }
+    
+    /* Mejorar el contraste de los textos */
+    .hero-title, .section-title {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Asegurar que la navegación inferior sea visible */
+    .bottom-nav {
+        display: flex !important;
+        background-color: rgba(0, 0, 0, 0.9) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
     }
 }

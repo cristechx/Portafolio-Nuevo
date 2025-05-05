@@ -34,274 +34,10 @@
     </div>
 
 <!-- 2. JavaScript - Agregar en app.js -->
-<script>
-// 3D Loader Controller (Versión Muy Lenta)
-document.addEventListener('DOMContentLoaded', () => {
-    const loader = document.querySelector('.page-loader');
-    const texts = document.querySelectorAll('.loader-3d-text');
-    
-    // Crear contenedor de partículas
-    const particlesContainer = document.createElement('div');
-    particlesContainer.className = 'particles-container';
-    loader.querySelector('.loader-content').appendChild(particlesContainer);
-    
-    // Crear partículas
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        const left = Math.random() * 100;
-        const size = Math.random() * 4 + 2;
-        const duration = Math.random() * 3 + 3;
-        const delay = Math.random() * 5;
-        
-        particle.style.left = `${left}%`;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.animationDuration = `${duration}s`;
-        particle.style.animationDelay = `${delay}s`;
-        
-        particlesContainer.appendChild(particle);
-    }
-    
-    // Secuencia de animación
-    let currentText = 0;
-    const timeline = [
-        { index: 0, duration: 10000 }, // Portafolio - 10 segundos
-        { index: 1, duration: 6000 }   // Cristian Garcia - 6 segundos
-    ];
-    
-    function showText(index) {
-        if (index >= texts.length) {
-            finishLoading();
-            return;
-        }
-        
-        const text = texts[index];
-        const duration = timeline[index].duration;
-        
-        // Mostrar texto
-        text.classList.remove('hidden');
-        text.classList.add('animate-in');
-        
-        setTimeout(() => {
-            // Ocultar texto
-            text.classList.remove('animate-in');
-            text.classList.add('animate-out');
-            
-            setTimeout(() => {
-                text.classList.add('hidden');
-                text.classList.remove('animate-out');
-                showText(index + 1);
-            }, 1500);
-        }, duration);
-    }
-    
-    function finishLoading() {
-        setTimeout(() => {
-            loader.classList.add('hidden');
-            document.body.classList.add('page-loaded');
-            
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 1000);
-        }, 1000);
-    }
-    
-    // Iniciar la secuencia
-    showText(0);
-});
-</script>
+
 
 <!-- 3. CSS - Agregar en animations.css o crear un nuevo archivo loader.css -->
-<style>
-/* 3D Page Loader */
-.page-loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    transition: opacity 1s ease, visibility 1s ease;
-}
 
-.page-loader.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loader-content {
-    text-align: center;
-    position: relative;
-    perspective: 2000px;
-}
-
-.loader-3d-scene {
-    position: relative;
-    width: 100%;
-    height: 150px;
-    margin-bottom: 80px;
-}
-
-.loader-3d-text {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(3rem, 10vw, 8rem);
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: -3px;
-    text-transform: uppercase;
-    background: linear-gradient(45deg, #1CB698, #32CD32, #1CB698);
-    background-size: 200% 200%;
-    animation: gradientMove 3s ease infinite, textGlow 2s ease-in-out infinite;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 
-        0 0 30px rgba(28, 182, 152, 0.7),
-        0 0 60px rgba(28, 182, 152, 0.5),
-        0 0 90px rgba(28, 182, 152, 0.3);
-    filter: drop-shadow(0 0 20px rgba(28, 182, 152, 0.5));
-}
-
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes textGlow {
-    0% { text-shadow: 0 0 30px rgba(28, 182, 152, 0.7), 0 0 60px rgba(28, 182, 152, 0.5); }
-    50% { text-shadow: 0 0 40px rgba(28, 182, 152, 1), 0 0 80px rgba(28, 182, 152, 0.8); }
-    100% { text-shadow: 0 0 30px rgba(28, 182, 152, 0.7), 0 0 60px rgba(28, 182, 152, 0.5); }
-}
-
-.loader-3d-text.hidden {
-    opacity: 0;
-    transform: translateX(-50%) scale(0.5) rotateY(90deg);
-    pointer-events: none;
-}
-
-.loader-3d-text.animate-in {
-    animation: textEnter 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes textEnter {
-    0% {
-        opacity: 0;
-        transform: translateX(-50%) scale(0.3) rotateY(-180deg) translateZ(-500px);
-        filter: blur(50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(-50%) scale(1) rotateY(0deg) translateZ(0);
-        filter: blur(0);
-    }
-}
-
-.loader-3d-text.animate-out {
-    animation: textExit 1.5s cubic-bezier(0.36, 0, 0.66, -0.56) forwards;
-}
-
-@keyframes textExit {
-    0% {
-        opacity: 1;
-        transform: translateX(-50%) scale(1) rotateY(0deg) translateZ(0);
-        filter: blur(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(-50%) scale(0.3) rotateY(180deg) translateZ(-500px);
-        filter: blur(50px);
-    }
-}
-
-.loader-progress {
-    width: 400px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 0 auto;
-    box-shadow: 0 0 10px rgba(28, 182, 152, 0.3);
-}
-
-.loader-progress-bar {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #1CB698, #32CD32, #1CB698);
-    background-size: 200% 100%;
-    animation: 
-        loadingProgress 16s ease-out forwards,
-        gradientMove 2s ease infinite;
-    border-radius: 4px;
-    position: relative;
-    box-shadow: 0 0 20px rgba(28, 182, 152, 0.7);
-}
-
-@keyframes loadingProgress {
-    0% { width: 0%; }
-    15% { width: 10%; }
-    63% { width: 50%; }
-    100% { width: 100%; }
-}
-
-/* Partículas */
-.particles-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    opacity: 0.8;
-}
-
-.particle {
-    position: absolute;
-    background: #1CB698;
-    border-radius: 50%;
-    animation: particleAnimation 6s linear infinite;
-    box-shadow: 0 0 15px rgba(28, 182, 152, 0.7);
-}
-
-@keyframes particleAnimation {
-    0% {
-        transform: translate(0, 100vh) scale(0);
-        opacity: 0;
-    }
-    5% {
-        opacity: 1;
-    }
-    95% {
-        opacity: 1;
-    }
-    100% {
-        transform: translate(0, -100px) scale(1.5);
-        opacity: 0;
-    }
-}
-
-/* Mobile Adjustments */
-@media (max-width: 768px) {
-    .loader-3d-text {
-        font-size: clamp(2rem, 15vw, 5rem);
-    }
-    
-    .loader-progress {
-        width: 85%;
-        max-width: 300px;
-    }
-}
-</style>
     
     <!-- Status Bar for Mobile -->
     <div class="status-bar">
@@ -325,30 +61,59 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
         </nav>
         
-        <div class="header-controls">
-            <!-- Theme Switcher -->
-            <div class="theme-switcher">
-                <button class="theme-btn" data-theme="default" style="background: #1CB698"></button>
-                <button class="theme-btn" data-theme="white" style="background: #FFF"></button>
-                <button class="theme-btn" data-theme="dark" style="background: #000"></button>
-                <button class="theme-btn" data-theme="pink" style="background: #FF69B4"></button>
-                <button class="theme-btn" data-theme="orange" style="background: #FF8C00"></button>
-                <button class="theme-btn" data-theme="green" style="background: #32CD32"></button>
-            </div>
-            
-            <!-- Language Switcher -->
-            <div class="language-switcher">
-                <button class="lang-btn active" data-lang="es">ES</button>
-                <button class="lang-btn" data-lang="en">EN</button>
-            </div>
-            
-            <!-- Mobile Menu Button -->
-            <button class="menu-toggle" aria-label="Menu">
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
-            </button>
+       <!-- Header Controls con selector de temas mejorado -->
+<div class="header-controls">
+    <!-- Theme Switcher para escritorio -->
+    <div class="theme-switcher">
+        <div class="theme-switcher-header">
+            <span data-i18n="theme.themes">Temas</span>
+            <span class="theme-dropdown-icon"><i class="fa-solid fa-chevron-down"></i></span>
         </div>
+        <div class="theme-options">
+            <button class="theme-btn active" data-theme="default" style="background: #1CB698" aria-label="Tema por defecto"></button>
+            <button class="theme-btn" data-theme="white" style="background: #FFF" aria-label="Tema blanco"></button>
+            <button class="theme-btn" data-theme="dark" style="background: #000" aria-label="Tema oscuro"></button>
+            <button class="theme-btn" data-theme="pink" style="background: #FF69B4" aria-label="Tema rosa"></button>
+            <button class="theme-btn" data-theme="orange" style="background: #FF8C00" aria-label="Tema naranja"></button>
+            <button class="theme-btn" data-theme="green" style="background: #32CD32" aria-label="Tema verde"></button>
+        </div>
+    </div>
+    
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" aria-label="Menu">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+</div>
+<!-- Mobile Theme Panel (fuera del header, antes del cierre del body) -->
+<div class="mobile-theme-panel">
+    <div class="mobile-theme-panel-header">
+        <span data-i18n="theme.themes">Temas</span>
+        <button class="mobile-theme-close"><i class="fa-solid fa-times"></i></button>
+    </div>
+    <div class="mobile-theme-options">
+        <button class="theme-btn" data-theme="default" style="background: #1CB698"></button>
+        <button class="theme-btn" data-theme="white" style="background: #FFF"></button>
+        <button class="theme-btn" data-theme="dark" style="background: #000"></button>
+        <button class="theme-btn" data-theme="pink" style="background: #FF69B4"></button>
+        <button class="theme-btn" data-theme="orange" style="background: #FF8C00"></button>
+        <button class="theme-btn" data-theme="green" style="background: #32CD32"></button>
+    </div>
+</div>
+
+<!-- Botón flotante para temas en móvil -->
+<button class="mobile-theme-toggle">
+    <i class="fa-solid fa-palette"></i>
+</button>
     </header>
 
     <!-- Mobile Overlay Menu -->
@@ -644,23 +409,24 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </section>
 
-        <!-- Portfolio Section -->
         <section id="portfolio" class="portfolio-section">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="section-header">
                     <span class="section-label">04 —</span>
                     <h2 class="section-title" data-i18n="portfolio.title">Portfolio</h2>
                 </div>
+                
                 <div class="portfolio-filters">
                     <button class="portfolio-filter active" data-filter="all" data-i18n="portfolio.all">Todo</button>
                     <button class="portfolio-filter" data-filter="Agencias" data-i18n="portfolio.agencies">Agencias</button>
                     <button class="portfolio-filter" data-filter="proyectos-personales" data-i18n="portfolio.personal">Personales</button>
                     <button class="portfolio-filter" data-filter="proyectos-moviles" data-i18n="portfolio.mobile">Móviles</button>
                 </div>
-                <div class="portfolio-scroll-wrapper">
-                    <div class="portfolio-grid">
+                
+                <div class="portfolio-container">
+                    <div class="portfolio-carousel">
                         <!-- Agencias -->
-                        <div class="portfolio-item" data-category="Agencias">
+                        <div class="portfolio-slide portfolio-item" data-category="Agencias">
                             <div class="portfolio-image-wrapper">
                                 <img src="img/cosostenible.png" alt="Cosostenible">
                                 <div class="portfolio-overlay">
@@ -675,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         </div>
                         
-                        <div class="portfolio-item" data-category="Agencias">
+                        <div class="portfolio-slide portfolio-item" data-category="Agencias">
                             <div class="portfolio-image-wrapper">
                                 <img src="img/baqueroleyva.png" alt="Baquero Leyva">
                                 <div class="portfolio-overlay">
@@ -691,7 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         
                         <!-- Personales -->
-                        <div class="portfolio-item" data-category="proyectos-personales">
+                        <div class="portfolio-slide portfolio-item" data-category="proyectos-personales">
                             <div class="portfolio-image-wrapper">
                                 <img src="img/web-Fotografia.png" alt="Fotografía">
                                 <div class="portfolio-overlay">
@@ -706,7 +472,23 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         </div>
                         
-                        <!-- Agregar todos los proyectos aquí -->
+                        <!-- Puedes agregar más proyectos aquí -->
+                    </div>
+                    
+                    <div class="portfolio-nav">
+                        <button class="portfolio-nav-btn portfolio-prev" aria-label="Proyecto anterior">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        
+                        <div class="portfolio-pagination">
+                            <span class="portfolio-dot active"></span>
+                            <span class="portfolio-dot"></span>
+                            <span class="portfolio-dot"></span>
+                        </div>
+                        
+                        <button class="portfolio-nav-btn portfolio-next" aria-label="Siguiente proyecto">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -715,19 +497,95 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="container">
+                <div class="section-header">
+                    <span class="section-label">05 —</span>
+                    <h2 class="section-title" data-i18n="contact.title">¿Tienes un proyecto en mente?</h2>
+                </div>
+                
                 <div class="contact-content">
                     <div class="contact-info">
-                        <h2 data-i18n="contact.title">¿Tienes un proyecto en mente?</h2>
-                        <p data-i18n="contact.subtitle">Estoy disponible para nuevos proyectos. ¡Hablemos!</p>
+                        <p class="contact-subtitle" data-i18n="contact.subtitle">Estoy disponible para nuevos proyectos. ¡Hablemos!</p>
                         <div class="contact-details">
-                            <a href="mailto:Cristianpulido672@gmail.com" class="contact-email">
-                                Cristianpulido672@gmail.com
+                            <p class="contact-detail">
+                                <i class="fa-solid fa-envelope"></i>
+                                <a href="mailto:Cristianpulido672@gmail.com" class="contact-email">Cristianpulido672@gmail.com</a>
+                            </p>
+                            <p class="contact-detail">
+                                <i class="fa-solid fa-phone"></i>
+                                <a href="tel:+573134723829" class="contact-phone">+57 313 472 3829</a>
+                            </p>
+                            <p class="contact-detail">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>Bogotá, Colombia</span>
+                            </p>
+                        </div>
+                        
+                        <div class="contact-social">
+                            <a href="https://github.com/CristianGarci42022" target="_blank" class="social-icon" aria-label="GitHub">
+                                <i class="fa-brands fa-github"></i>
                             </a>
-                            <a href="tel:+573134723829" class="contact-phone">
-                                +57 313 472 3829
+                            <a href="https://www.linkedin.com/in/cristian-garc%C3%ADa-848ba616b" target="_blank" class="social-icon" aria-label="LinkedIn">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://wa.me/+573134723829" target="_blank" class="social-icon" aria-label="WhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </div>
                     </div>
+                    
+                    <div class="contact-form-container">
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="name" data-i18n="contact.name">Nombre</label>
+                                <input 
+                                    type="text" 
+                                    id="name" 
+                                    name="name" 
+                                    required
+                                    placeholder="Tu nombre"
+                                >
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" data-i18n="contact.email">Email</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    required
+                                    placeholder="tu@email.com"
+                                >
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject" data-i18n="contact.subject">Asunto</label>
+                                <input 
+                                    type="text" 
+                                    id="subject" 
+                                    name="subject" 
+                                    required
+                                    placeholder="Asunto del mensaje"
+                                >
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" data-i18n="contact.message">Mensaje</label>
+                                <textarea 
+                                    id="message" 
+                                    name="message" 
+                                    rows="5" 
+                                    required
+                                    placeholder="Tu mensaje aquí..."
+                                ></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn" data-i18n="contact.send">
+                                <span>Enviar Mensaje</span>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
                     
                     <!-- Contact Buttons for Mobile -->
                     <div class="contact-buttons">
@@ -803,14 +661,17 @@ document.addEventListener('DOMContentLoaded', () => {
         <i class="fa-solid fa-chevron-up"></i>
     </a>
 
-    <!-- Scripts -->
-    <script src="js/app.js"></script>
-    <script src="js/cursor.js"></script>
-    <script src="js/scroll.js"></script>
-    <script src="js/mobile-nav.js"></script>
-    <script src="js/pwa.js"></script>
-    <script src="js/loader3d.js"></script>
-    <script src="translations/languages.js"></script>
+<!-- Scripts -->
+<script src="js/app.js"></script>
+<script src="js/loader3d.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/scroll.js"></script>
+<script src="js/mobile-nav.js"></script>
+<script src="js/theme-switcher.js"></script>
+<script src="js/portfolio-carousel.js"></script>
+<script src="js/contact-form.js"></script>
+<script src="js/pwa.js"></script>
+<script src="translations/languages.js"></script>
 </body>
 
 </html>

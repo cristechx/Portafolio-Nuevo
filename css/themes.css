@@ -202,15 +202,64 @@ body[data-theme="green"] .skill-progress::after {
     );
 }
 
-/* Theme Switcher Styles */
+/* Theme Switcher Mejorado */
 .theme-switcher {
     position: relative;
     margin-right: 20px;
 }
 
+.theme-switcher-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.theme-switcher-header:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.theme-dropdown-icon {
+    transition: transform 0.3s ease;
+}
+
+.theme-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 160px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.theme-switcher:hover .theme-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.theme-switcher:hover .theme-dropdown-icon {
+    transform: rotate(180deg);
+}
+
 .theme-btn {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     border: 2px solid transparent;
     cursor: pointer;
@@ -237,6 +286,92 @@ body[data-theme="green"] .skill-progress::after {
     height: 8px;
     background: #fff;
     border-radius: 50%;
+}
+
+/* Mobile Theme Panel */
+.mobile-theme-toggle {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.mobile-theme-panel {
+    position: fixed;
+    bottom: 140px;
+    right: 20px;
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 15px;
+    width: 240px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    z-index: 998;
+    transition: all 0.3s ease;
+    transform: scale(0.9);
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+
+.mobile-theme-panel.active {
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-theme-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-theme-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.mobile-theme-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+/* Mobile Adjustments */
+@media screen and (max-width: 768px) {
+    .theme-switcher {
+        display: none;
+    }
+    
+    .mobile-theme-toggle {
+        display: flex;
+    }
+    
+    .mobile-theme-panel {
+        display: block;
+    }
 }
 
 /* Language Switcher Styles */
@@ -319,4 +454,130 @@ body {
 
 * {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+/* Portfolio Carousel Styles */
+.portfolio-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+}
+
+.portfolio-carousel {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.portfolio-slide {
+    height: 500px;
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-slide:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.portfolio-image-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.portfolio-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.portfolio-slide:hover .portfolio-image-wrapper img {
+    transform: scale(1.05);
+}
+
+.portfolio-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    gap: 20px;
+}
+
+.portfolio-nav-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.portfolio-nav-btn:hover {
+    background: var(--accent-color);
+    color: #000;
+    transform: translateY(-3px);
+}
+
+.portfolio-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.portfolio-pagination {
+    display: flex;
+    gap: 10px;
+}
+
+.portfolio-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.portfolio-dot.active {
+    background: var(--accent-color);
+    transform: scale(1.2);
+}
+
+/* Fix para problemas específicos */
+.portfolio-item {
+    
+    opacity: 1;
+   
+}
+
+.portfolio-slide.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Media queries para carrusel */
+@media (max-width: 1200px) {
+    .portfolio-slide {
+        height: 450px;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-slide {
+        height: 400px;
+    }
+    
+    .portfolio-nav-btn {
+        width: 40px;
+        height: 40px;
+    }
 }

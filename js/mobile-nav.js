@@ -8,6 +8,11 @@ class MobileNavigation {
         this.mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
         this.sections = document.querySelectorAll('section[id]');
         
+        // Verificar si los elementos existen antes de inicializar
+        if (!this.mobileMenuBtn || !this.mobileOverlayMenu) {
+            console.warn('Elementos de navegación móvil no encontrados');
+        }
+        
         this.init();
     }
     
@@ -50,9 +55,14 @@ class MobileNavigation {
     }
     
     toggleMobileMenu() {
-        this.hamburger?.classList.toggle('active');
-        this.mobileOverlayMenu?.classList.toggle('active');
-        document.body.style.overflow = this.mobileOverlayMenu?.classList.contains('active') ? 'hidden' : '';
+        if (this.hamburger) {
+            this.hamburger.classList.toggle('active');
+        }
+        
+        if (this.mobileOverlayMenu) {
+            this.mobileOverlayMenu.classList.toggle('active');
+            document.body.style.overflow = this.mobileOverlayMenu.classList.contains('active') ? 'hidden' : '';
+        }
     }
     
     closeMobileMenu() {
@@ -221,9 +231,13 @@ class MobileNavigation {
     }
 }
 
-// Initialize mobile navigation
+// Asegúrate de que la clase se inicialice correctamente
 document.addEventListener('DOMContentLoaded', () => {
-    new MobileNavigation();
+    try {
+        new MobileNavigation();
+    } catch (error) {
+        console.error('Error al inicializar la navegación móvil:', error);
+    }
 });
 
 // Handle resize events
