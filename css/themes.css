@@ -1,0 +1,322 @@
+/* Theme Variables */
+:root {
+    /* Default Theme */
+    --theme-default-accent: #1CB698;
+    --theme-default-primary: #1a1a1a;
+    --theme-default-secondary: #ff4d4d;
+    --theme-default-background: #000000;
+    --theme-default-text: #ffffff;
+    --theme-default-text-muted: #a0a0a0;
+    --theme-default-card-bg: #1a1a1a;
+    
+    /* White Theme */
+    --theme-white-accent: #1CB698;
+    --theme-white-primary: #f8f8f8;
+    --theme-white-secondary: #333333;
+    --theme-white-background: #ffffff;
+    --theme-white-text: #333333;
+    --theme-white-text-muted: #666666;
+    --theme-white-card-bg: #f5f5f5;
+    
+    /* Dark Theme */
+    --theme-dark-accent: #1CB698;
+    --theme-dark-primary: #000000;
+    --theme-dark-secondary: #ff4d4d;
+    --theme-dark-background: #0a0a0a;
+    --theme-dark-text: #ffffff;
+    --theme-dark-text-muted: #888888;
+    --theme-dark-card-bg: #1a1a1a;
+    
+    /* Pink Theme */
+    --theme-pink-accent: #FF1493;
+    --theme-pink-primary: #2a1a1f;
+    --theme-pink-secondary: #FF69B4;
+    --theme-pink-background: #141114;
+    --theme-pink-text: #ffffff;
+    --theme-pink-text-muted: #FFB6C1;
+    --theme-pink-card-bg: #2a1a1f;
+    
+    /* Orange Theme */
+    --theme-orange-accent: #FF8C00;
+    --theme-orange-primary: #2a2114;
+    --theme-orange-secondary: #FFA500;
+    --theme-orange-background: #1f1511;
+    --theme-orange-text: #ffffff;
+    --theme-orange-text-muted: #FFD700;
+    --theme-orange-card-bg: #2a2114;
+    
+    /* Green Theme */
+    --theme-green-accent: #32CD32;
+    --theme-green-primary: #1a2a1a;
+    --theme-green-secondary: #228B22;
+    --theme-green-background: #0f1f0f;
+    --theme-green-text: #ffffff;
+    --theme-green-text-muted: #98FB98;
+    --theme-green-card-bg: #1a2a1a;
+}
+
+/* Default Theme (Initial) */
+body[data-theme="default"] {
+    --accent-color: var(--theme-default-accent);
+    --primary-color: var(--theme-default-primary);
+    --secondary-color: var(--theme-default-secondary);
+    --background-color: var(--theme-default-background);
+    --text-color: var(--theme-default-text);
+    --text-muted: var(--theme-default-text-muted);
+    --card-bg: var(--theme-default-card-bg);
+}
+
+/* White Theme */
+body[data-theme="white"] {
+    --accent-color: var(--theme-white-accent);
+    --primary-color: var(--theme-white-primary);
+    --secondary-color: var(--theme-white-secondary);
+    --background-color: var(--theme-white-background);
+    --text-color: var(--theme-white-text);
+    --text-muted: var(--theme-white-text-muted);
+    --card-bg: var(--theme-white-card-bg);
+}
+
+body[data-theme="white"] .nav-link::after {
+    background-color: var(--accent-color);
+}
+
+body[data-theme="white"] .profile-image-wrapper {
+    border-color: var(--accent-color);
+}
+
+body[data-theme="white"] .social-icon {
+    border-color: var(--text-muted);
+    color: var(--text-color);
+}
+
+body[data-theme="white"] .social-icon:hover {
+    border-color: var(--accent-color);
+}
+
+body[data-theme="white"] .skill-bar {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="white"] .timeline-item::after {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="white"] .portfolio-filter {
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+body[data-theme="white"] .portfolio-overlay {
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.8));
+}
+
+body[data-theme="white"] .status-bar {
+    background: #ffffff;
+    color: #333333;
+}
+
+body[data-theme="white"] .bottom-nav {
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="white"] .nav-tab {
+    color: #666666;
+}
+
+body[data-theme="white"] .nav-tab.active {
+    color: var(--accent-color);
+}
+
+/* Dark Theme */
+body[data-theme="dark"] {
+    --accent-color: var(--theme-dark-accent);
+    --primary-color: var(--theme-dark-primary);
+    --secondary-color: var(--theme-dark-secondary);
+    --background-color: var(--theme-dark-background);
+    --text-color: var(--theme-dark-text);
+    --text-muted: var(--theme-dark-text-muted);
+    --card-bg: var(--theme-dark-card-bg);
+}
+
+/* Pink Theme */
+body[data-theme="pink"] {
+    --accent-color: var(--theme-pink-accent);
+    --primary-color: var(--theme-pink-primary);
+    --secondary-color: var(--theme-pink-secondary);
+    --background-color: var(--theme-pink-background);
+    --text-color: var(--theme-pink-text);
+    --text-muted: var(--theme-pink-text-muted);
+    --card-bg: var(--theme-pink-card-bg);
+}
+
+body[data-theme="pink"] .interest-item:hover {
+    background: var(--accent-color);
+    color: #000;
+}
+
+body[data-theme="pink"] .skill-progress::after {
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,182,193,0.3), 
+        transparent
+    );
+}
+
+/* Orange Theme */
+body[data-theme="orange"] {
+    --accent-color: var(--theme-orange-accent);
+    --primary-color: var(--theme-orange-primary);
+    --secondary-color: var(--theme-orange-secondary);
+    --background-color: var(--theme-orange-background);
+    --text-color: var(--theme-orange-text);
+    --text-muted: var(--theme-orange-text-muted);
+    --card-bg: var(--theme-orange-card-bg);
+}
+
+body[data-theme="orange"] .skill-progress::after {
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,215,0,0.3), 
+        transparent
+    );
+}
+
+/* Green Theme */
+body[data-theme="green"] {
+    --accent-color: var(--theme-green-accent);
+    --primary-color: var(--theme-green-primary);
+    --secondary-color: var(--theme-green-secondary);
+    --background-color: var(--theme-green-background);
+    --text-color: var(--theme-green-text);
+    --text-muted: var(--theme-green-text-muted);
+    --card-bg: var(--theme-green-card-bg);
+}
+
+body[data-theme="green"] .skill-progress::after {
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(152,251,152,0.3), 
+        transparent
+    );
+}
+
+/* Theme Switcher Styles */
+.theme-switcher {
+    display: flex;
+    gap: 8px;
+    margin-right: 20px;
+}
+
+.theme-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+}
+
+.theme-btn.active {
+    border-color: #fff;
+    transform: scale(1.2);
+}
+
+.theme-btn.active::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+/* Language Switcher Styles */
+.language-switcher {
+    display: flex;
+    gap: 5px;
+    margin-right: 20px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover,
+.lang-btn.active {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #000;
+}
+
+/* Header Controls */
+.header-controls {
+    display: flex;
+    align-items: center;
+}
+
+/* Mobile Theme Adjustments */
+@media screen and (max-width: 768px) {
+    .theme-switcher {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        background: var(--card-bg);
+        padding: 10px;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        z-index: 9999;
+    }
+    
+    .language-switcher {
+        position: fixed;
+        bottom: 150px;
+        right: 20px;
+        background: var(--card-bg);
+        padding: 5px;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        z-index: 9999;
+    }
+    
+    .mobile-overlay-menu {
+        background: var(--background-color);
+    }
+    
+    .mobile-menu-link {
+        color: var(--text-color);
+    }
+    
+    .mobile-menu-link:active {
+        color: var(--accent-color);
+    }
+    
+    .contact-button {
+        background: var(--accent-color);
+        color: var(--background-color);
+    }
+}
+
+/* Smooth Transitions */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

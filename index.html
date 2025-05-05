@@ -7,6 +7,13 @@
     <title>Cristian Garcia - Desarrollador Web</title>
     <link rel="icon" href="img/icon.png">
     
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1CB698">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
+    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
@@ -17,55 +24,387 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
-
+    <link rel="stylesheet" href="css/themes.css">
     
     <!-- Scripts -->
     <script defer src="js/app.js"></script>
     <script defer src="js/cursor.js"></script>
     <script defer src="js/scroll.js"></script>
+    <script defer src="js/mobile-nav.js"></script>
+    <script defer src="js/pwa.js"></script>
+    <script defer src="js/sw.js"></script>
+    <script defer src="translations/languages.js"></script>
 </head>
-<body>
+<body data-theme="default">
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
     
-    <!-- Page Loader -->
-    <div class="page-loader">
-        <div class="loader-content">
-            <div class="loader-spinner"></div>
-            <div class="loader-text">Cargando...</div>
+
+<!-- 1. HTML - Reemplaza tu loader actual con este -->
+<div class="page-loader">
+    <div class="loader-content">
+        <div class="loader-3d-scene">
+            <div class="loader-3d-text animate-in" data-text="Portafolio">Portafolio</div>
+            <div class="loader-3d-text hidden" data-text="Cristian Garcia">Cristian Garcia</div>
         </div>
+        <div class="loader-progress">
+            <div class="loader-progress-bar"></div>
+        </div>
+    </div>
+</div>
+
+<!-- 2. JavaScript - Agregar en app.js -->
+<script>
+// 3D Loader Controller (Versión Muy Lenta)
+document.addEventListener('DOMContentLoaded', () => {
+    const loader = document.querySelector('.page-loader');
+    const texts = document.querySelectorAll('.loader-3d-text');
+    
+    // Crear contenedor de partículas
+    const particlesContainer = document.createElement('div');
+    particlesContainer.className = 'particles-container';
+    loader.querySelector('.loader-content').appendChild(particlesContainer);
+    
+    // Crear partículas
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const left = Math.random() * 100;
+        const size = Math.random() * 4 + 2;
+        const duration = Math.random() * 3 + 3;
+        const delay = Math.random() * 5;
+        
+        particle.style.left = `${left}%`;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        particlesContainer.appendChild(particle);
+    }
+    
+    // Secuencia de animación
+    let currentText = 0;
+    const timeline = [
+        { index: 0, duration: 10000 }, // Portafolio - 10 segundos
+        { index: 1, duration: 6000 }   // Cristian Garcia - 6 segundos
+    ];
+    
+    function showText(index) {
+        if (index >= texts.length) {
+            finishLoading();
+            return;
+        }
+        
+        const text = texts[index];
+        const duration = timeline[index].duration;
+        
+        // Mostrar texto
+        text.classList.remove('hidden');
+        text.classList.add('animate-in');
+        
+        setTimeout(() => {
+            // Ocultar texto
+            text.classList.remove('animate-in');
+            text.classList.add('animate-out');
+            
+            setTimeout(() => {
+                text.classList.add('hidden');
+                text.classList.remove('animate-out');
+                showText(index + 1);
+            }, 1500);
+        }, duration);
+    }
+    
+    function finishLoading() {
+        setTimeout(() => {
+            loader.classList.add('hidden');
+            document.body.classList.add('page-loaded');
+            
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 1000);
+        }, 1000);
+    }
+    
+    // Iniciar la secuencia
+    showText(0);
+});
+</script>
+
+<!-- 3. CSS - Agregar en animations.css o crear un nuevo archivo loader.css -->
+<style>
+/* 3D Page Loader */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.page-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+    position: relative;
+    perspective: 2000px;
+}
+
+.loader-3d-scene {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 80px;
+}
+
+.loader-3d-text {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -3px;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #1CB698, #32CD32, #1CB698);
+    background-size: 200% 200%;
+    animation: gradientMove 3s ease infinite, textGlow 2s ease-in-out infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 
+        0 0 30px rgba(28, 182, 152, 0.7),
+        0 0 60px rgba(28, 182, 152, 0.5),
+        0 0 90px rgba(28, 182, 152, 0.3);
+    filter: drop-shadow(0 0 20px rgba(28, 182, 152, 0.5));
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes textGlow {
+    0% { text-shadow: 0 0 30px rgba(28, 182, 152, 0.7), 0 0 60px rgba(28, 182, 152, 0.5); }
+    50% { text-shadow: 0 0 40px rgba(28, 182, 152, 1), 0 0 80px rgba(28, 182, 152, 0.8); }
+    100% { text-shadow: 0 0 30px rgba(28, 182, 152, 0.7), 0 0 60px rgba(28, 182, 152, 0.5); }
+}
+
+.loader-3d-text.hidden {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.5) rotateY(90deg);
+    pointer-events: none;
+}
+
+.loader-3d-text.animate-in {
+    animation: textEnter 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes textEnter {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.3) rotateY(-180deg) translateZ(-500px);
+        filter: blur(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1) rotateY(0deg) translateZ(0);
+        filter: blur(0);
+    }
+}
+
+.loader-3d-text.animate-out {
+    animation: textExit 1.5s cubic-bezier(0.36, 0, 0.66, -0.56) forwards;
+}
+
+@keyframes textExit {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1) rotateY(0deg) translateZ(0);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.3) rotateY(180deg) translateZ(-500px);
+        filter: blur(50px);
+    }
+}
+
+.loader-progress {
+    width: 400px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(28, 182, 152, 0.3);
+}
+
+.loader-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #1CB698, #32CD32, #1CB698);
+    background-size: 200% 100%;
+    animation: 
+        loadingProgress 16s ease-out forwards,
+        gradientMove 2s ease infinite;
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(28, 182, 152, 0.7);
+}
+
+@keyframes loadingProgress {
+    0% { width: 0%; }
+    15% { width: 10%; }
+    63% { width: 50%; }
+    100% { width: 100%; }
+}
+
+/* Partículas */
+.particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.8;
+}
+
+.particle {
+    position: absolute;
+    background: #1CB698;
+    border-radius: 50%;
+    animation: particleAnimation 6s linear infinite;
+    box-shadow: 0 0 15px rgba(28, 182, 152, 0.7);
+}
+
+@keyframes particleAnimation {
+    0% {
+        transform: translate(0, 100vh) scale(0);
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, -100px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .loader-3d-text {
+        font-size: clamp(2rem, 15vw, 5rem);
+    }
+    
+    .loader-progress {
+        width: 85%;
+        max-width: 300px;
+    }
+}
+</style>
+    
+    <!-- Status Bar for Mobile -->
+    <div class="status-bar">
+        <span class="status-time" data-time="9:41"></span>
+        <span class="status-battery" data-battery="100%"></span>
     </div>
     
     <!-- Navigation -->
     <header class="header">
         <div class="logo">
-            <span class="logo-text">CRISTIAN GARCIA</span>
+            <span class="logo-text">CG</span>
         </div>
-        <nav>
+        
+        <nav class="desktop-nav">
             <ul>
-                <li><a href="#home" class="nav-link">Inicio</a></li>
-                <li><a href="#about" class="nav-link">Sobre Mí</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#experience" class="nav-link">Experiencia</a></li>
-                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#home" class="nav-link" data-i18n="nav.home">Inicio</a></li>
+                <li><a href="#about" class="nav-link" data-i18n="nav.about">Sobre Mí</a></li>
+                <li><a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a></li>
+                <li><a href="#experience" class="nav-link" data-i18n="nav.experience">Experiencia</a></li>
+                <li><a href="#portfolio" class="nav-link" data-i18n="nav.portfolio">Portfolio</a></li>
             </ul>
         </nav>
-        <button class="menu-toggle" aria-label="Menu">
-            <span class="burger-line"></span>
-            <span class="burger-line"></span>
-            <span class="burger-line"></span>
-        </button>
+        
+        <div class="header-controls">
+            <!-- Theme Switcher -->
+            <div class="theme-switcher">
+                <button class="theme-btn" data-theme="default" style="background: #1CB698"></button>
+                <button class="theme-btn" data-theme="white" style="background: #FFF"></button>
+                <button class="theme-btn" data-theme="dark" style="background: #000"></button>
+                <button class="theme-btn" data-theme="pink" style="background: #FF69B4"></button>
+                <button class="theme-btn" data-theme="orange" style="background: #FF8C00"></button>
+                <button class="theme-btn" data-theme="green" style="background: #32CD32"></button>
+            </div>
+            
+            <!-- Language Switcher -->
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="es">ES</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button class="menu-toggle" aria-label="Menu">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+        </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <nav class="mobile-menu">
-        <ul>
-            <li><a href="#home" class="nav-link">Inicio</a></li>
-            <li><a href="#about" class="nav-link">Sobre Mí</a></li>
-            <li><a href="#skills" class="nav-link">Skills</a></li>
-            <li><a href="#experience" class="nav-link">Experiencia</a></li>
-            <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+    <!-- Mobile Overlay Menu -->
+    <nav class="mobile-overlay-menu">
+        <ul class="mobile-menu-list">
+            <li class="mobile-menu-item">
+                <a href="#home" class="mobile-menu-link">
+                    <span class="mobile-menu-icon"><i class="fa-solid fa-house"></i></span>
+                    <span data-i18n="nav.home">Inicio</span>
+                </a>
+            </li>
+            <li class="mobile-menu-item">
+                <a href="#about" class="mobile-menu-link">
+                    <span class="mobile-menu-icon"><i class="fa-solid fa-user"></i></span>
+                    <span data-i18n="nav.about">Sobre Mí</span>
+                </a>
+            </li>
+            <li class="mobile-menu-item">
+                <a href="#skills" class="mobile-menu-link">
+                    <span class="mobile-menu-icon"><i class="fa-solid fa-code"></i></span>
+                    <span data-i18n="nav.skills">Skills</span>
+                </a>
+            </li>
+            <li class="mobile-menu-item">
+                <a href="#experience" class="mobile-menu-link">
+                    <span class="mobile-menu-icon"><i class="fa-solid fa-briefcase"></i></span>
+                    <span data-i18n="nav.experience">Experiencia</span>
+                </a>
+            </li>
+            <li class="mobile-menu-item">
+                <a href="#portfolio" class="mobile-menu-link">
+                    <span class="mobile-menu-icon"><i class="fa-solid fa-layer-group"></i></span>
+                    <span data-i18n="nav.portfolio">Portfolio</span>
+                </a>
+            </li>
         </ul>
     </nav>
 
@@ -83,7 +422,7 @@
                 <h1 class="hero-title">
                     <span class="title-text">Cristian Garcia</span>
                 </h1>
-                <p class="hero-subtitle">
+                <p class="hero-subtitle" data-i18n="hero.subtitle">
                     Desarrollador Web & UI/UX Designer
                 </p>
                 <div class="social-links">
@@ -108,15 +447,15 @@
             <div class="container">
                 <div class="section-header">
                     <span class="section-label">01 —</span>
-                    <h2 class="section-title">Sobre Mí</h2>
+                    <h2 class="section-title" data-i18n="about.title">Sobre Mí</h2>
                 </div>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>¡Hola! Soy <strong>Cristian Garcia</strong>, desarrollador web especializado en WordPress y desarrollo de plugins a medida. Mi experiencia incluye herramientas avanzadas como <strong>JetEngine</strong> y <strong>Crocoblock</strong>, así como múltiples lenguajes de programación.</p>
-                        <p>Certificado en <strong>ISO 27001</strong>, me enfoco en crear soluciones innovadoras, seguras y altamente funcionales.</p>
+                        <p data-i18n="about.intro1">¡Hola! Soy <strong>Cristian Garcia</strong>, desarrollador web especializado en WordPress y desarrollo de plugins a medida. Mi experiencia incluye herramientas avanzadas como <strong>JetEngine</strong> y <strong>Crocoblock</strong>, así como múltiples lenguajes de programación.</p>
+                        <p data-i18n="about.intro2">Certificado en <strong>ISO 27001</strong>, me enfoco en crear soluciones innovadoras, seguras y altamente funcionales.</p>
                         <div class="personal-info">
                             <div class="info-item">
-                                <span class="info-label">Teléfono</span>
+                                <span class="info-label" data-i18n="about.phone">Teléfono</span>
                                 <span class="info-value">+57 3134723829</span>
                             </div>
                             <div class="info-item">
@@ -124,25 +463,24 @@
                                 <span class="info-value">Cristianpulido672@gmail.com</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Ubicación</span>
+                                <span class="info-label" data-i18n="about.location">Ubicación</span>
                                 <span class="info-value">Bogotá, Colombia</span>
                             </div>
                         </div>
                         <a href="CV/CV-Cristian Garcia .pdf" download class="cv-button">
-                            Descargar CV
+                            <span data-i18n="about.downloadCV">Descargar CV</span>
                             <i class="fa-solid fa-download"></i>
                         </a>
                     </div>
                     <div class="about-image">
                         <div class="decorative-shape"></div>
-                        <!-- Agregamos un grid de intereses -->
                         <div class="interests-grid">
-                            <div class="interest-item"><i class="fa-solid fa-gamepad"></i> Juegos</div>
-                            <div class="interest-item"><i class="fa-solid fa-headphones"></i> Música</div>
-                            <div class="interest-item"><i class="fa-solid fa-plane"></i> Viajar</div>
-                            <div class="interest-item"><i class="fa-solid fa-microchip"></i> Tecnología</div>
-                            <div class="interest-item"><i class="fa-solid fa-camera"></i> Fotografía</div>
-                            <div class="interest-item"><i class="fa-solid fa-book"></i> Libros</div>
+                            <div class="interest-item"><i class="fa-solid fa-gamepad"></i> <span data-i18n="interests.games">Juegos</span></div>
+                            <div class="interest-item"><i class="fa-solid fa-headphones"></i> <span data-i18n="interests.music">Música</span></div>
+                            <div class="interest-item"><i class="fa-solid fa-plane"></i> <span data-i18n="interests.travel">Viajar</span></div>
+                            <div class="interest-item"><i class="fa-solid fa-microchip"></i> <span data-i18n="interests.tech">Tecnología</span></div>
+                            <div class="interest-item"><i class="fa-solid fa-camera"></i> <span data-i18n="interests.photo">Fotografía</span></div>
+                            <div class="interest-item"><i class="fa-solid fa-book"></i> <span data-i18n="interests.books">Libros</span></div>
                         </div>
                     </div>
                 </div>
@@ -154,11 +492,11 @@
             <div class="container">
                 <div class="section-header">
                     <span class="section-label">02 —</span>
-                    <h2 class="section-title">Skills</h2>
+                    <h2 class="section-title" data-i18n="skills.title">Skills</h2>
                 </div>
                 <div class="skills-grid">
                     <div class="skills-column">
-                        <h3>Habilidades Técnicas</h3>
+                        <h3 data-i18n="skills.technicalTitle">Habilidades Técnicas</h3>
                         <div class="skill-item">
                             <div class="skill-info">
                                 <span class="skill-name">JavaScript</span>
@@ -197,7 +535,7 @@
                         </div>
                         <div class="skill-item">
                             <div class="skill-info">
-                                <span class="skill-name">Bases de Datos</span>
+                                <span class="skill-name" data-i18n="skills.databases">Bases de Datos</span>
                                 <span class="skill-percent">70%</span>
                             </div>
                             <div class="skill-bar">
@@ -206,10 +544,10 @@
                         </div>
                     </div>
                     <div class="skills-column">
-                        <h3>Habilidades Profesionales</h3>
+                        <h3 data-i18n="skills.professionalTitle">Habilidades Profesionales</h3>
                         <div class="skill-item">
                             <div class="skill-info">
-                                <span class="skill-name">Comunicación</span>
+                                <span class="skill-name" data-i18n="skills.communication">Comunicación</span>
                                 <span class="skill-percent">80%</span>
                             </div>
                             <div class="skill-bar">
@@ -218,7 +556,7 @@
                         </div>
                         <div class="skill-item">
                             <div class="skill-info">
-                                <span class="skill-name">Trabajo en Equipo</span>
+                                <span class="skill-name" data-i18n="skills.teamwork">Trabajo en Equipo</span>
                                 <span class="skill-percent">100%</span>
                             </div>
                             <div class="skill-bar">
@@ -227,7 +565,7 @@
                         </div>
                         <div class="skill-item">
                             <div class="skill-info">
-                                <span class="skill-name">Creatividad</span>
+                                <span class="skill-name" data-i18n="skills.creativity">Creatividad</span>
                                 <span class="skill-percent">80%</span>
                             </div>
                             <div class="skill-bar">
@@ -236,7 +574,7 @@
                         </div>
                         <div class="skill-item">
                             <div class="skill-info">
-                                <span class="skill-name">Autodidacta</span>
+                                <span class="skill-name" data-i18n="skills.selfTaught">Autodidacta</span>
                                 <span class="skill-percent">100%</span>
                             </div>
                             <div class="skill-bar">
@@ -245,7 +583,7 @@
                         </div>
                         <div class="skill-item">
                             <div class="skill-info">
-                                <span class="skill-name">Curiosidad</span>
+                                <span class="skill-name" data-i18n="skills.curiosity">Curiosidad</span>
                                 <span class="skill-percent">100%</span>
                             </div>
                             <div class="skill-bar">
@@ -262,63 +600,63 @@
             <div class="container">
                 <div class="section-header">
                     <span class="section-label">03 —</span>
-                    <h2 class="section-title">Experiencia</h2>
+                    <h2 class="section-title" data-i18n="experience.title">Experiencia</h2>
                 </div>
                 <div class="experience-grid">
                     <div class="experience-column">
-                        <h3>Educación y Certificaciones</h3>
+                        <h3 data-i18n="experience.educationTitle">Educación y Certificaciones</h3>
                         <div class="timeline">
                             <div class="timeline-item" data-aos="fade-up">
                                 <div class="timeline-date">2024</div>
                                 <div class="timeline-content">
                                     <h4>Certificación ISO 27001</h4>
                                     <p class="timeline-org">Hacker Mentor</p>
-                                    <p>Desarrollé habilidades en ciberseguridad y principios fundamentales de la norma ISO 27001.</p>
+                                    <p data-i18n="experience.iso">Desarrollé habilidades en ciberseguridad y principios fundamentales de la norma ISO 27001.</p>
                                 </div>
                             </div>
                             <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
                                 <div class="timeline-date">2022</div>
                                 <div class="timeline-content">
-                                    <h4>Diplomado en Desarrollo de Software</h4>
+                                    <h4 data-i18n="experience.softwareDiploma">Diplomado en Desarrollo de Software</h4>
                                     <p class="timeline-org">Universidad de Antioquia</p>
-                                    <p>Obtención de conocimientos especializados en el ciclo de vida del desarrollo de software.</p>
+                                    <p data-i18n="experience.softwareDesc">Obtención de conocimientos especializados en el ciclo de vida del desarrollo de software.</p>
                                 </div>
                             </div>
                             <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
                                 <div class="timeline-date">2019</div>
                                 <div class="timeline-content">
-                                    <h4>Tecnólogo en Desarrollo de Sistemas</h4>
+                                    <h4 data-i18n="experience.techDegree">Tecnólogo en Desarrollo de Sistemas</h4>
                                     <p class="timeline-org">SENA</p>
-                                    <p>Especializado en desarrollo e implementación de soluciones tecnológicas.</p>
+                                    <p data-i18n="experience.techDesc">Especializado en desarrollo e implementación de soluciones tecnológicas.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="experience-column">
-                        <h3>Experiencia Laboral</h3>
+                        <h3 data-i18n="experience.workTitle">Experiencia Laboral</h3>
                         <div class="timeline">
                             <div class="timeline-item" data-aos="fade-up">
-                                <div class="timeline-date">2024 - Actual</div>
+                                <div class="timeline-date" data-i18n="experience.current">2024 - Actual</div>
                                 <div class="timeline-content">
-                                    <h4>Desarrollador WordPress</h4>
+                                    <h4 data-i18n="experience.wordpressDeveloper">Desarrollador WordPress</h4>
                                     <p class="timeline-org">Colectivo Web</p>
-                                    <p>Especializado en sitios web responsivos, SEO, Elementor Pro, JetEngine y desarrollo de plugins personalizados. Gestión avanzada de cPanel y migraciones.</p>
+                                    <p data-i18n="experience.wordpressDesc">Especializado en sitios web responsivos, SEO, Elementor Pro, JetEngine y desarrollo de plugins personalizados. Gestión avanzada de cPanel y migraciones.</p>
                                 </div>
                             </div>
                             <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
                                 <div class="timeline-date">2021 - 2024</div>
                                 <div class="timeline-content">
-                                    <h4>Desarrollador Front-End</h4>
-                                    <p class="timeline-org">Freelance</p>
-                                    <p>Enfoque en desarrollo web full-stack, optimización SEO y certificación ISO 27001.</p>
+                                    <h4 data-i18n="experience.frontendDeveloper">Desarrollador Front-End</h4>
+                                    <p class="timeline-org" data-i18n="experience.freelance">Freelance</p>
+                                    <p data-i18n="experience.freelanceDesc">Enfoque en desarrollo web full-stack, optimización SEO y certificación ISO 27001.</p>
                                 </div>
                             </div>
                             <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
                                 <div class="timeline-date">2021</div>
                                 <div class="timeline-content">
-                                    <h4>Desarrollador Web</h4>
+                                    <h4 data-i18n="experience.webDeveloper">Desarrollador Web</h4>
                                     <p class="timeline-org">ManpowerGroup</p>
-                                    <p>Capacitación en Angular, Java, React y metodologías ágiles.</p>
+                                    <p data-i18n="experience.manpowerDesc">Capacitación en Angular, Java, React y metodologías ágiles.</p>
                                 </div>
                             </div>
                         </div>
@@ -332,13 +670,13 @@
             <div class="container-fluid">
                 <div class="section-header">
                     <span class="section-label">04 —</span>
-                    <h2 class="section-title">Portfolio</h2>
+                    <h2 class="section-title" data-i18n="portfolio.title">Portfolio</h2>
                 </div>
                 <div class="portfolio-filters">
-                    <button class="portfolio-filter active" data-filter="all">Todo</button>
-                    <button class="portfolio-filter" data-filter="Agencias">Agencias</button>
-                    <button class="portfolio-filter" data-filter="proyectos-personales">Personales</button>
-                    <button class="portfolio-filter" data-filter="proyectos-moviles">Móviles</button>
+                    <button class="portfolio-filter active" data-filter="all" data-i18n="portfolio.all">Todo</button>
+                    <button class="portfolio-filter" data-filter="Agencias" data-i18n="portfolio.agencies">Agencias</button>
+                    <button class="portfolio-filter" data-filter="proyectos-personales" data-i18n="portfolio.personal">Personales</button>
+                    <button class="portfolio-filter" data-filter="proyectos-moviles" data-i18n="portfolio.mobile">Móviles</button>
                 </div>
                 <div class="portfolio-scroll-wrapper">
                     <div class="portfolio-grid">
@@ -351,14 +689,13 @@
                                         <h3>Cosostenible</h3>
                                         <p>Colectivo Web</p>
                                         <a href="https://cosostenible.com/" target="_blank" class="portfolio-link">
-                                            Ver Proyecto <i class="fa-solid fa-arrow-right"></i>
+                                            <span data-i18n="portfolio.viewProject">Ver Proyecto</span> <i class="fa-solid fa-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Add more portfolio items here -->
                         <div class="portfolio-item" data-category="Agencias">
                             <div class="portfolio-image-wrapper">
                                 <img src="img/baqueroleyva.png" alt="Baquero Leyva">
@@ -367,7 +704,7 @@
                                         <h3>Baquero Leyva</h3>
                                         <p>Colectivo Web</p>
                                         <a href="https://baqueroleyvaarrendamientos.com/" target="_blank" class="portfolio-link">
-                                            Ver Proyecto <i class="fa-solid fa-arrow-right"></i>
+                                            <span data-i18n="portfolio.viewProject">Ver Proyecto</span> <i class="fa-solid fa-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -380,18 +717,17 @@
                                 <img src="img/web-Fotografia.png" alt="Fotografía">
                                 <div class="portfolio-overlay">
                                     <div class="portfolio-info">
-                                        <h3>Web Fotografía</h3>
-                                        <p>Proyecto Personal</p>
+                                        <h3 data-i18n="portfolio.photography">Web Fotografía</h3>
+                                        <p data-i18n="portfolio.personalProject">Proyecto Personal</p>
                                         <a href="https://daniel-phog.netlify.app/" target="_blank" class="portfolio-link">
-                                            Ver Proyecto <i class="fa-solid fa-arrow-right"></i>
+                                            <span data-i18n="portfolio.viewProject">Ver Proyecto</span> <i class="fa-solid fa-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Continue adding portfolio items -->
-                        <!-- Ensure to include all your current projects -->
+                        <!-- Agregar todos los proyectos aquí -->
                     </div>
                 </div>
             </div>
@@ -402,8 +738,8 @@
             <div class="container">
                 <div class="contact-content">
                     <div class="contact-info">
-                        <h2>¿Tienes un proyecto en mente?</h2>
-                        <p>Estoy disponible para nuevos proyectos. ¡Hablemos!</p>
+                        <h2 data-i18n="contact.title">¿Tienes un proyecto en mente?</h2>
+                        <p data-i18n="contact.subtitle">Estoy disponible para nuevos proyectos. ¡Hablemos!</p>
                         <div class="contact-details">
                             <a href="mailto:Cristianpulido672@gmail.com" class="contact-email">
                                 Cristianpulido672@gmail.com
@@ -413,27 +749,54 @@
                             </a>
                         </div>
                     </div>
-                    <div class="contact-form-wrapper">
-                        <form class="contact-form" id="contactForm">
-                            <div class="form-group">
-                                <input type="text" id="name" name="name" placeholder="Nombre" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" id="email" name="email" placeholder="Email" required>
-                            </div>
-                            <div class="form-group">
-                                <textarea id="message" name="message" placeholder="Mensaje" required></textarea>
-                            </div>
-                            <button type="submit" class="submit-button">
-                                Enviar Mensaje
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </button>
-                        </form>
+                    
+                    <!-- Contact Buttons for Mobile -->
+                    <div class="contact-buttons">
+                        <a href="mailto:Cristianpulido672@gmail.com" class="contact-button">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span data-i18n="contact.sendEmail">Enviar Email</span>
+                        </a>
+                        
+                        <a href="tel:+573134723829" class="contact-button">
+                            <i class="fa-solid fa-phone"></i>
+                            <span data-i18n="contact.callNow">Llamar Ahora</span>
+                        </a>
+                        
+                        <a href="https://wa.me/+573134723829" class="contact-button" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-content">
+            <a href="#home" class="nav-tab" data-section="home">
+                <span class="icon"><i class="fa-solid fa-house"></i></span>
+                <span class="nav-tab-label" data-i18n="nav.home">Inicio</span>
+            </a>
+            <a href="#about" class="nav-tab" data-section="about">
+                <span class="icon"><i class="fa-solid fa-user"></i></span>
+                <span class="nav-tab-label" data-i18n="nav.about">Perfil</span>
+            </a>
+            <a href="#portfolio" class="nav-tab" data-section="portfolio">
+                <span class="icon"><i class="fa-solid fa-layer-group"></i></span>
+                <span class="nav-tab-label" data-i18n="nav.portfolio">Trabajos</span>
+            </a>
+            <a href="#experience" class="nav-tab" data-section="experience">
+                <span class="icon"><i class="fa-solid fa-briefcase"></i></span>
+                <span class="nav-tab-label" data-i18n="nav.career">Carrera</span>
+            </a>
+            <a href="#contact" class="nav-tab" data-section="contact">
+                <span class="icon"><i class="fa-solid fa-paper-plane"></i></span>
+                <span class="nav-tab-label" data-i18n="nav.contact">Contacto</span>
+            </a>
+        </div>
+    </nav>
 
     <!-- Footer -->
     <footer class="footer">
@@ -450,7 +813,7 @@
                         <i class="fa-brands fa-whatsapp"></i>
                     </a>
                 </div>
-                <p class="footer-copyright">
+                <p class="footer-copyright" data-i18n="footer.copyright">
                     © 2024 Cristian Garcia. Todos los derechos reservados.
                 </p>
             </div>
@@ -461,4 +824,5 @@
         <i class="fa-solid fa-chevron-up"></i>
     </a>
 </body>
+
 </html>
