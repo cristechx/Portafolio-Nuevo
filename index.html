@@ -2,58 +2,36 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cristian Garcia - Desarrollador Web</title>
-    <link rel="icon" href="img/icon.png">
+    <title>Cristian Garcia - Portfolio</title>
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#1CB698">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="manifest.json">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
     
-    <!-- Styles -->
+    <!-- CSS Files -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/themes.css">
-    
-    <!-- Scripts -->
-    <script defer src="js/app.js"></script>
-    <script defer src="js/cursor.js"></script>
-    <script defer src="js/scroll.js"></script>
-    <script defer src="js/mobile-nav.js"></script>
-    <script defer src="js/pwa.js"></script>
-    <script defer src="translations/languages.js"></script>
-    <script defer src="js/sw.js"></script>
-    
 </head>
 <body data-theme="default">
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-    
-
-<!-- 1. HTML - Reemplaza tu loader actual con este -->
-<div class="page-loader">
-    <div class="loader-content">
-        <div class="loader-3d-scene">
-            <div class="loader-3d-text animate-in" data-text="Portafolio">Portafolio</div>
-            <div class="loader-3d-text hidden" data-text="Cristian Garcia">Cristian Garcia</div>
-        </div>
-        <div class="loader-progress">
-            <div class="loader-progress-bar"></div>
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="loader-content">
+            <div class="loader-3d-scene">
+                <div class="loader-3d-text" data-text="Portafolio">Portafolio</div>
+                <div class="loader-3d-text hidden" data-text="Cristian Garcia">Cristian Garcia</div>
+            </div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
         </div>
     </div>
-</div>
 
 <!-- 2. JavaScript - Agregar en app.js -->
 <script>
@@ -824,6 +802,15 @@ document.addEventListener('DOMContentLoaded', () => {
     <a href="#home" class="back-to-top" aria-label="Volver arriba">
         <i class="fa-solid fa-chevron-up"></i>
     </a>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/cursor.js"></script>
+    <script src="js/scroll.js"></script>
+    <script src="js/mobile-nav.js"></script>
+    <script src="js/pwa.js"></script>
+    <script src="js/loader3d.js"></script>
+    <script src="translations/languages.js"></script>
 </body>
 
 </html>

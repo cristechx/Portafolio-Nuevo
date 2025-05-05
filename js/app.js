@@ -300,7 +300,15 @@ if (portfolioWrapper && portfolioGrid) {
         }
     });
 }
-
+// Theme Switcher functionality
+document.addEventListener('DOMContentLoaded', () => {
+    // ... código del theme switcher ...
+    
+    // Portfolio carousel mobile
+    if (window.innerWidth <= 768) {
+        // ... código del carousel ...
+    }
+});
 // Add scroll event listener for mobile detection
 let hasTouch = false;
 document.addEventListener('touchstart', () => {

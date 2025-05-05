@@ -300,7 +300,12 @@
     }
 }
 
+
 @media (max-width: 768px) {
+    .portfolio-scroll-wrapper {
+        overflow: hidden;
+        position: relative;
+    }
     body {
         overflow-x: hidden;
     }

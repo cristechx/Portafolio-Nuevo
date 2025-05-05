@@ -9,6 +9,7 @@
     --theme-default-text-muted: #a0a0a0;
     --theme-default-card-bg: #1a1a1a;
     
+    
     /* White Theme */
     --theme-white-accent: #1CB698;
     --theme-white-primary: #f8f8f8;
@@ -203,8 +204,7 @@ body[data-theme="green"] .skill-progress::after {
 
 /* Theme Switcher Styles */
 .theme-switcher {
-    display: flex;
-    gap: 8px;
+    position: relative;
     margin-right: 20px;
 }
 

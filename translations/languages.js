@@ -59,7 +59,10 @@ const translations = {
         "contact.subtitle": "Estoy disponible para nuevos proyectos. ¡Hablemos!",
         "contact.sendEmail": "Enviar Email",
         "contact.callNow": "Llamar Ahora",
-        "footer.copyright": "© 2024 Cristian Garcia. Todos los derechos reservados."
+        "footer.copyright": "© 2024 Cristian Garcia. Todos los derechos reservados.",
+        "theme.themes": "Temas",
+        "theme.green": "Verde",
+        "theme.white": "Blanco",
     },
     en: {
         "loading": "Loading...",
@@ -120,7 +123,10 @@ const translations = {
         "contact.subtitle": "I'm available for new projects. Let's talk!",
         "contact.sendEmail": "Send Email",
         "contact.callNow": "Call Now",
-        "footer.copyright": "© 2024 Cristian Garcia. All rights reserved."
+        "footer.copyright": "© 2024 Cristian Garcia. All rights reserved.",
+        "theme.themes": "Themes",
+        "theme.green": "Green",
+        "theme.white": "White",
     }
 };
 

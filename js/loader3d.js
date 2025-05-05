@@ -1,15 +1,14 @@
 // 3D Loader Controller (Versión Lenta)
-class Loader3D {
-    constructor() {
-        this.loader = document.querySelector('.page-loader');
-        this.texts = document.querySelectorAll('.loader-3d-text');
-        this.progressBar = document.querySelector('.loader-progress-bar');
-        this.currentTextIndex = 0;
-        this.animationTimeline = [
-            { text: 'Portafolio', duration: 10000 }, // 10 segundos
-            { text: 'Cristian Garcia', duration: 6000 } // 6 segundos
-        ];
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    const loader = document.querySelector('.page-loader');
+    const text1 = document.querySelector('.loader-3d-text[data-text="Portafolio"]');
+    const text2 = document.querySelector('.loader-3d-text[data-text="Cristian Garcia"]');
+    
+    // AQUÍ PUEDES MODIFICAR LOS TIEMPOS (en milisegundos)
+    const TIEMPO_PORTAFOLIO = 10000;  // 10 segundos
+    const TIEMPO_TRANSICION = 1500;   // 1.5 segundos
+    const TIEMPO_CRISTIAN = 6000;     // 6 segundos
+    
     
     init() {
         this.startLoadingSequence();
@@ -61,7 +60,7 @@ class Loader3D {
             this.loader.style.display = 'none';
         }, 1000);
     }
-}
+});
 
 // Inicializar el loader
 const loader3D = new Loader3D();
