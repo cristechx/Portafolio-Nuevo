@@ -63,6 +63,34 @@ document.addEventListener('DOMContentLoaded', () => {
         initBackToTop();
     }
 });
+// Añade esto al app.js
+document.addEventListener('DOMContentLoaded', () => {
+    // Fix para la interacción del botón mobile-menu-btn
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const hamburger = document.querySelector('.hamburger');
+    const mobileOverlayMenu = document.querySelector('.mobile-overlay-menu');
+    
+    if (mobileMenuBtn && hamburger && mobileOverlayMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileOverlayMenu.classList.toggle('active');
+            document.body.style.overflow = mobileOverlayMenu.classList.contains('active') ? 'hidden' : '';
+        });
+    }
+    
+    // Detectar si es un dispositivo táctil para desactivar el cursor personalizado
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.documentElement.classList.add('is-touch-device');
+        document.body.classList.add('is-touch-device');
+        
+        // Forzar desactivación del cursor
+        const customCursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        if (customCursor) customCursor.style.display = 'none';
+        if (cursorFollower) cursorFollower.style.display = 'none';
+    }
+});
 
 // Inicializar navegación
 function initNavigation() {

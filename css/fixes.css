@@ -1,0 +1,541 @@
+/* 
+   Correcciones para la visualización del portafolio
+   Arregla problemas en móvil y escritorio
+*/
+
+/* ======== CORRECCIONES GENERALES ======== */
+:root {
+    --transition: all 0.3s ease;
+}
+
+/* Asegurar que las secciones son visibles */
+body.page-loaded section {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
+}
+
+body.page-loaded .hero-content * {
+    opacity: 1 !important;
+}
+
+/* Desactivar cursor personalizado en dispositivos táctiles */
+.is-touch-device,
+.is-touch-device * {
+    cursor: auto !important;
+}
+
+.is-touch-device .cursor,
+.is-touch-device .cursor-follower {
+    display: none !important;
+}
+
+/* ======== CORRECCIONES DE NAVEGACIÓN ======== */
+/* Estilos para el hamburger */
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 24px;
+    height: 20px;
+    justify-content: center;
+}
+
+.hamburger span {
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Menu overlay móvil */
+.mobile-overlay-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-overlay-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-list {
+    list-style: none;
+    padding: 0;
+}
+
+.mobile-menu-item {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.mobile-menu-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: clamp(18px, 5vw, 24px);
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-link:active {
+    color: var(--accent-color);
+}
+
+/* Bottom Nav para móvil */
+.bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 990;
+}
+
+.bottom-nav-content {
+    display: flex;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0;
+    color: #888;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.nav-tab.active {
+    color: var(--accent-color);
+}
+
+.nav-tab .icon {
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.nav-tab-label {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* ======== CORRECCIONES RESPONSIVAS ======== */
+/* Mobile First */
+@media (max-width: 768px) {
+    /* Header y navegación */
+    .header {
+        padding: 10px 15px;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        height: 60px;
+    }
+    
+    .desktop-nav {
+        display: none !important;
+    }
+    
+    .mobile-menu-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .menu-toggle {
+        display: none !important;
+    }
+    
+    .bottom-nav {
+        display: block;
+    }
+    
+    /* Secciones */
+    section {
+        padding: 60px 0 40px;
+    }
+    
+    #home {
+        padding-top: 70px;
+        min-height: calc(100vh - 60px);
+    }
+    
+    /* Ajustes de perfil */
+    .profile-image-wrapper {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 30px;
+    }
+    
+    .hero-title {
+        font-size: clamp(2.5rem, 8vw, 3.5rem);
+    }
+    
+    .hero-subtitle {
+        font-size: 14px;
+        letter-spacing: 4px;
+        margin-bottom: 30px;
+    }
+    
+    /* Portfolio */
+    .portfolio-filters {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .portfolio-filter {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+    
+    .portfolio-scroll-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Portfolio Grid Fixes */
+
+/* Fix for portfolio grid layout */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 0 15px;
+    width: 100%;
+}
+
+/* For desktop, ensure 3 columns */
+@media screen and (min-width: 1025px) {
+    .portfolio-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        flex-wrap: wrap !important;
+        overflow: visible !important;
+    }
+    
+    .portfolio-scroll-wrapper {
+        overflow: visible !important;
+    }
+    
+    .portfolio-item {
+        width: 100% !important;
+        min-width: unset !important;
+        height: 400px !important;
+    }
+}
+
+/* For tablet, show 2 columns */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .portfolio-item {
+        width: 100%;
+        min-width: unset;
+        height: 380px;
+    }
+}
+
+/* For mobile, use horizontal scroll */
+@media screen and (max-width: 768px) {
+    .portfolio-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 0 15px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .portfolio-item {
+        flex: 0 0 280px;
+        min-width: 280px;
+        height: 380px;
+        margin-right: 0;
+        scroll-snap-align: start;
+    }
+}
+
+/* Make portfolio items visible by default */
+.portfolio-item {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: all 0.3s ease;
+}
+
+/* Restore hover effects for desktop */
+@media (hover: hover) {
+    .portfolio-item:hover .portfolio-overlay {
+        opacity: 1;
+    }
+    
+    .portfolio-item:hover img {
+        transform: scale(1.1);
+    }
+}
+    
+    /* About */
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .about-text {
+        font-size: 15px;
+    }
+    
+    .cv-button {
+        width: 100%;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    /* Skills */
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    /* Experience */
+    .experience-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    /* Contact */
+    .contact-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .contact-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .contact-button {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    /* Formulario */
+    .form-group input, 
+    .form-group textarea {
+        font-size: 16px; /* Evitar zoom en inputs en iOS */
+    }
+    
+    /* Footer */
+    .footer {
+        padding-bottom: 80px; /* Espacio para bottom nav */
+    }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .header {
+        padding: 20px 30px;
+    }
+    
+    .mobile-menu-btn {
+        display: flex !important;
+    }
+    
+    .desktop-nav {
+        display: none !important;
+    }
+    
+    .bottom-nav {
+        display: none !important;
+    }
+    
+    /* Ajustes de secciones */
+    .about-content,
+    .skills-grid,
+    .experience-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .portfolio-item {
+        width: 330px;
+        height: 420px;
+    }
+    
+    /* Ajuste del tema en tablet */
+    .theme-switcher {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--card-bg);
+        padding: 10px;
+        border-radius: 15px;
+        z-index: 990;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+    .mobile-menu-btn {
+        display: none !important;
+    }
+    
+    .bottom-nav {
+        display: none !important;
+    }
+    
+    .desktop-nav {
+        display: flex !important;
+    }
+    
+    /* Mejorar interacción para desktop */
+    .social-icon:hover,
+    .nav-link:hover,
+    .portfolio-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    /* Correción del cursor */
+    .cursor, 
+    .cursor-follower {
+        pointer-events: none;
+    }
+}
+
+/* ======== CORRECCIONES DE LOADER ======== */
+.page-loader {
+    z-index: 10000;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.page-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* ======== CORRECCIONES DE TEMA Y SWITCH ======== */
+.theme-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.theme-btn.active {
+    border-color: #fff;
+    transform: scale(1.2);
+}
+
+/* Mobile Theme Toggle */
+.mobile-theme-toggle {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    z-index: 990;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ======== CORRECCIONES DE ANIMACIÓN ======== */
+/* Corregir animaciones de scroll */
+.visible {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+}
+
+/* Efectos de hover */
+@media (hover: hover) {
+    .nav-link:hover::after {
+        width: 100%;
+    }
+    
+    .social-icon:hover {
+        border-color: var(--accent-color);
+        transform: translateY(-5px);
+    }
+    
+    .portfolio-filter:hover {
+        border-color: var(--accent-color);
+        color: var(--accent-color);
+    }
+    
+    .portfolio-item:hover .portfolio-overlay {
+        opacity: 1;
+    }
+}
+
+/* Fix para scrolls horizontales */
+body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* Ajustes para mayor accesibilidad */
+button, 
+a, 
+.portfolio-filter, 
+.nav-tab, 
+.social-icon {
+    min-height: 44px;
+    min-width: 44px;
+}
